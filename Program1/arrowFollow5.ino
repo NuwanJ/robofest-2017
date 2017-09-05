@@ -7,8 +7,8 @@
 //static int reading[6];
 
 
-
-void start(int boxColor) {
+/*
+  void start(int boxColor) {
   //04/09/2017 gihanchanaka@gmail.com
   //This uses the colour reading as 1-RED,2-GREEN.3=BLUE
 
@@ -19,8 +19,8 @@ void start(int boxColor) {
   trailAndErrorArrowFollow_Loop(boxColor);
 
 
-}
-
+  }
+*/
 
 
 void firstArrowFollow(int boxColor) {
@@ -84,23 +84,21 @@ void firstArrowFollow(int boxColor) {
     for (int j = 0; j < 6; j++) weightedSum += reading[j] * weight[j];
 
     if (weightedSum != 0) {
-      if (weightedSum < 0) {
-        goR();//Serial.println("R");}
-        else {
-          goL();//Serial.println("L");}
-        }
-        else {
-          goF();//Serial.println("F");}
-
-          goFF();
-          readSensorLine(reading);
-        }
-
-        mode = SECOND_ARROW_FOLLOW;
-        //Serial.println(F("Finished the first arrow"));
-      }
+      if (weightedSum < 0)goR();//Serial.println("R");}
+      else goL();//Serial.println("L");}
     }
+    else {
+      goF();//Serial.println("F");}
+
+      goFF();
+      readSensorLine(reading);
+    }
+
+    mode = SECOND_ARROW_FOLLOW;
+    //Serial.println(F("Finished the first arrow"));
   }
+}
+}
 }
 
 
