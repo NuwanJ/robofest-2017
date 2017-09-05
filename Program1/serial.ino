@@ -126,7 +126,7 @@ void serialEvent() {
 }
 
 
-int readBoxColor() {
+void readBoxColor() {
   mySerial.print("j");
   delay(10);
   while (mySerial.available() > 0) {

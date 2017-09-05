@@ -14,6 +14,7 @@ void testAndGetData(char rOrd, double spd, double steps) {
     motorWrite(steps, 1, 1);
   }
   //stepper.begin(200, MICROSTEPS);
+    stepper.setRPM(200);
 }
 
 
