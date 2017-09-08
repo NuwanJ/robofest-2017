@@ -41,13 +41,15 @@ void firstArrowFollow(int boxColor) {
       turnCW(10);
       if (getColorReading() == boxColor) {
         int hitCount = 0;
-        for (int xx = 0; xx < 4; xx++) if (getColorReading() == boxColor)hitCount++;
-        turnCW(-5);
-        for (int xx = 0; xx < 4; xx++) if (getColorReading() == boxColor)hitCount++;
-        turnCW(10);
-        for (int xx = 0; xx < 4; xx++) if (getColorReading() == boxColor)hitCount++;
-        turnCW(-5);
-        if (hitCount > 5) {
+        turnCW(-6); if (getColorReading() == boxColor)hitCount++;
+        turnCW(3); if (getColorReading() == boxColor)hitCount++;
+        turnCW(6); if (getColorReading() == boxColor)hitCount++;
+        turnCW(3); if (getColorReading() == boxColor)hitCount++;
+        turnCW(-6); if (getColorReading() == boxColor)hitCount++;
+        Serial.print("Hits: ");
+        Serial.println(hitCount);
+
+        if (hitCount >= 2) {
           foundTheTailfOfFirstArrow = true;
           break;
         }
@@ -163,9 +165,6 @@ void trailAndErrorArrowFollow_LoopOneArrow(int boxColor) {
   //<<<<<<<<<The part of the function to find an arrow tail>>>>>>>>>
 
   while (!foundColor) {
-    ledRed();
-    Serial.print("1. Free memory: ");
-    Serial.println(freeMemory());
     readSensorLine(reading);
     while (sumOfArray(reading, 6) == 0) {
       goFF();
@@ -176,8 +175,19 @@ void trailAndErrorArrowFollow_LoopOneArrow(int boxColor) {
 
 
     if (getColorReading() == boxColor) {
-      foundColor = true;
-      break;
+      int hitCount = 0;
+      turnCW(-6); if (getColorReading() == boxColor)hitCount++;
+      turnCW(3); if (getColorReading() == boxColor)hitCount++;
+      turnCW(6); if (getColorReading() == boxColor)hitCount++;
+      turnCW(3); if (getColorReading() == boxColor)hitCount++;
+      turnCW(-6); if (getColorReading() == boxColor)hitCount++;
+      Serial.print("Hits: ");
+      Serial.println(hitCount);
+
+      if (hitCount >= 2) {
+        foundColor = true;
+        break;
+      }
     }
 
     else {
@@ -188,13 +198,15 @@ void trailAndErrorArrowFollow_LoopOneArrow(int boxColor) {
           turnCW(-10);
           if (getColorReading() == boxColor) {
             int hitCount = 0;
-            for (int xx = 0; xx < 4; xx++) if (getColorReading() == boxColor)hitCount++;
-            turnCW(-5);
-            for (int xx = 0; xx < 4; xx++) if (getColorReading() == boxColor)hitCount++;
-            turnCW(10);
-            for (int xx = 0; xx < 4; xx++) if (getColorReading() == boxColor)hitCount++;
-            turnCW(-5);
-            if (hitCount > 5) {
+            turnCW(-6); if (getColorReading() == boxColor)hitCount++;
+            turnCW(3); if (getColorReading() == boxColor)hitCount++;
+            turnCW(6); if (getColorReading() == boxColor)hitCount++;
+            turnCW(3); if (getColorReading() == boxColor)hitCount++;
+            turnCW(-6); if (getColorReading() == boxColor)hitCount++;
+            Serial.print("Hits: ");
+            Serial.println(hitCount);
+
+            if (hitCount >= 2) {
               foundColor = true;
               break;
             }
@@ -209,13 +221,15 @@ void trailAndErrorArrowFollow_LoopOneArrow(int boxColor) {
             turnCW(10);
             if (getColorReading() == boxColor) {
               int hitCount = 0;
-              for (int xx = 0; xx < 4; xx++) if (getColorReading() == boxColor)hitCount++;
-              turnCW(-5);
-              for (int xx = 0; xx < 4; xx++) if (getColorReading() == boxColor)hitCount++;
-              turnCW(10);
-              for (int xx = 0; xx < 4; xx++) if (getColorReading() == boxColor)hitCount++;
-              turnCW(-5);
-              if (hitCount > 5) {
+              turnCW(-6); if (getColorReading() == boxColor)hitCount++;
+              turnCW(3); if (getColorReading() == boxColor)hitCount++;
+              turnCW(6); if (getColorReading() == boxColor)hitCount++;
+              turnCW(3); if (getColorReading() == boxColor)hitCount++;
+              turnCW(-6); if (getColorReading() == boxColor)hitCount++;
+              Serial.print("Hits: ");
+              Serial.println(hitCount);
+
+              if (hitCount >= 2) {
                 foundColor = true;
                 break;
               }
@@ -268,13 +282,9 @@ void trailAndErrorArrowFollow_LoopOneArrow(int boxColor) {
 
   //<<<<<<<<<The part of the function to go along the arrow>>>>>>>>>
 
-  ledGreen();
-
-  Serial.println("Found the tail of arrow");
   readSensorLine(reading);
   while (sumOfArray(reading, 6) != 0) {
     trailAndErrorArrowFollow_Forward();
-    Serial.println(sumOfArray(reading, 6));
     readSensorLine(reading);
     if (sumOfArray(reading, 6) >= 5) {
 
@@ -282,6 +292,8 @@ void trailAndErrorArrowFollow_LoopOneArrow(int boxColor) {
         mode = DROP_BOX; //*************************************************************
         return;     // TODO : ???
       }
+    }else{
+      return;
     }
   }
 
@@ -331,13 +343,13 @@ void trailAndErrorArrowFollow_Forward() {
   /*
     (LEFT) R[0] R[1] R[2] R[3] R[4] R[5]  (Right)
     Weights:  3   2   1   -1   -2    -3
-              R[7]
-              R[8]
+    R[7]
+    R[8]
   */
   Serial.print("3. Free memory: ");
   Serial.println(freeMemory());
 
-  //Serial.print("Forward loop| weight= ");
+  //Serial.print("Forward loop | weight = ");
   int weight[6] = { -3, -2, -1, 1, 2, 3};
 
   readSensorLine(reading);
@@ -351,12 +363,12 @@ void trailAndErrorArrowFollow_Forward() {
   //LOGIC -- 1 -- Basic
   if (weightedSum != 0) {
     if (weightedSum < 0) {
-      //Serial.println("Forward loop- Turn right");
+      //Serial.println("Forward loop - Turn right");
       motorWrite(100, -100);
       delay(100);
     }
     else {
-      //Serial.println("Forward loop- Turn left");
+      //Serial.println("Forward loop - Turn left");
       motorWrite(-100, 100);
       delay(100);
     }
@@ -372,11 +384,11 @@ void trailAndErrorArrowFollow_Backward() {
   /*
     (LEFT) R[0] R[1] R[2] R[3] R[4] R[5]  (Right)
     Weights:  3   2   1   -1   -2    -3
-              R[7]
-              R[8]
+    R[7]
+    R[8]
   */
 
-  //Serial.print("Backward loop| weight= ");
+  //Serial.print("Backward loop | weight = ");
   int weight[6] = { -3, -2, -1, 1, 2, 3};
 
   readSensorLine(reading);
@@ -390,12 +402,12 @@ void trailAndErrorArrowFollow_Backward() {
   //LOGIC -- 1 -- Basic
   if (weightedSum != 0) {
     if (weightedSum > 0) {
-      //Serial.println("Backward loop- Turn right");
+      //Serial.println("Backward loop - Turn right");
       goL();
       delay(100);
     }
     else {
-      //Serial.println("Backward loop- Turn left");
+      //Serial.println("Backward loop - Turn left");
       motorWrite(-50, 50);
       delay(100);
     }

@@ -27,7 +27,7 @@ void mazeRunAdvanced() {
 
 void explore() {
   // IF YOU WANT LEFT HAND RULE PUT LEFT SENSOR CHECK AS FIRST CHECK!!!
-  
+
   if (RIGHT_HAND_RULE) {
     if (!wall[RIGHT_SENSOR]) {
       maze_turnRight();
@@ -68,9 +68,9 @@ void explore() {
     }
   }
   // store the last position as the last valid position in the maze
-  finalXPosition = posX; finalYPosition = posY;
+  //finalXPosition = posX; finalYPosition = posY;  // ##########################################################################################
 
-  // go forward
+  // rgo forward
   posX += dir[1][0];
   posY += dir[1][1];
 
@@ -81,9 +81,7 @@ void explore() {
     mode = PICK_BOX; // TODO: change this to correct mode
     isMazeSolved = 1;
     saveEEPROM();
-    
   } else {
-
     //store the count number in the maze position
     maze[posX][posY] = posCount;
     //save the count position in EEPROM
@@ -137,10 +135,12 @@ void executeCommand(int i) {
   Serial.println(solvedCommandQueue[i]);
   if (solvedCommandQueue[i] == 3) { // these values need to chage appropriately
     maze_turnLeft();
+    currentFacingDir = (currentFacingDir + 4 - 1)%4;
   } else if (solvedCommandQueue[i] == 0) {
     maze_goForward();
   } else if (solvedCommandQueue[i] == 1) {
     maze_turnRight();
+    currentFacingDir = (currentFacingDir + 4 + 1)%4;
   } else if (solvedCommandQueue[i] == 2) {
     maze_turnBack(); // never happens :P
   } else if (solvedCommandQueue[i] == 4) {
@@ -335,3 +335,4 @@ void mazeOption1() {
   delay(100);
 
 }
+

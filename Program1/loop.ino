@@ -14,7 +14,7 @@ void loop() {
         beep();
         stand();
 
-        mode = MAZE_OPTION;//PICK_BOX; //FIND_ARROW;
+        mode = MAZE_RUN;// PICK_BOX; //FIND_ARROW;
 
         Serial.println(F(">> BEGIN -> ###"));
         //delay(500);
@@ -48,17 +48,7 @@ void loop() {
     //-------------------------------------------------------------------------------------------------------------- Maze run
     case MAZE_RUN:
 
-      buttonStatus = digitalRead(BUTTON_1);
-      //readBoxColor();
-
-      if (buttonStatus == 0) { // Execute whrn button was pressed or color is not equal to 0
-        mode = PICK_BOX;
-        saveEEPROM();
-        Serial.println(F(">> MAZE RUN -> PICKING_BOX"));
-      } else {
-        mazeRunAdvanced();
-      }
-
+      mazeRunAdvanced();
       break;
 
 
@@ -68,11 +58,18 @@ void loop() {
       //Go suitable distance back, expand arm and go suitable distance forward, now take the box
       motorWrite(50, -1, -1);       // Going out from maze towards box
       readyToPick();
-      delay(2000);                  // TODO : Must optimize the time, distance Important !!!
-      motorWrite(120, 1, 1);
+      delay(1000);                  // TODO : Must optimize the time, distance Important !!!
+      drop();
+      delay(1000);
+      motorWrite(100, 1, 1);
       readBoxColor();
-      delay(500);
+      delay(1000);
       pick();
+
+      if (isBoxThere == 0) {
+        randomNumber();
+      }
+
       delay(1000);
       motorWrite(120, -1, -1);
       delay(500);
@@ -92,7 +89,7 @@ void loop() {
       break;
 
     case SECOND_ARROW_FOLLOW:
-      trailAndErrorArrowFollow_LoopOneArrow(COLOR_GREEN);
+      trailAndErrorArrowFollow_LoopOneArrow(boxColorReading);
       break;
 
 
@@ -241,6 +238,12 @@ void printColor(int c) {
 }
 
 
+int isBoxThere() {
+
+}
+int randomNumber() {
+  return random(1, 3);
+}
 
 
 

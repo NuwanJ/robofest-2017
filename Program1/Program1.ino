@@ -45,9 +45,16 @@ void setup() {
   //pinMode(BUTTON_2, INPUT_PULLUP);
 
   pinMode(PIN_LED, OUTPUT);
-
+  currentFacingDir = 1;
   loadEEPROM(); // loading EEPROM data
-  isMazeSolved = 0;
+
+
+  finalXPosition = 2;//########################################################################################################################
+  finalYPosition = 0;
+
+  boxXPosition = finalXPosition;
+  boxYPosition = -1;
+
   if (isMazeSolved) { // maze has being traversed before.
     solveMaze();
   } else {

@@ -68,7 +68,8 @@ uint16_t raw_clr, raw_red, raw_green, raw_blue;
 enum {COLOR_OPEN, COLOR_RED, COLOR_GREEN, COLOR_BLUE};
 int floorColor = 0;
 int boxColor = 0;
-int boxColorReading = COLOR_BLUE;
+int boxColorReading = COLOR_GREEN;
+
 #define WHITE_THERSOLD  800 // **This depends with the distance from sensor to the object
 #define RED_GB_GAP 100
 
@@ -126,8 +127,8 @@ int posCount = 1;
 int startXPosition = 5, startYPosition = 5; // starting position of the maze
 int posX = startXPosition, posY = startYPosition; // current position for traversing the maze at first
 
-int finalXPosition = 10;  // TODO: define this
-int finalYPosition = 10; //position of the destination cell. when robo reach here the box should be in front!!!!
+int finalXPosition = 0;  // TODO: define this
+int finalYPosition = 0;  // position of the destination cell. when robo reach here the box should be in front!!!!
 
 int boxXPosition, boxYPosition; // coordinates of the box position. THIS IS OUTSIDE THE MAZE
 
@@ -136,7 +137,7 @@ int dir[4][2] = { {0, 1}, { -1, 0}, {0, -1},  { 1, 0}};
 
 #if defined(STEPPER_MOTORS)
 
-const int  maze_forward_Steps = 300;
+const int  maze_forward_Steps = 315;
 const int maze_turnLeft_Steps = STEPS_PER_ROUND / 4;
 const int maze_turnRight_Steps =  - 1 * STEPS_PER_ROUND / 4;
 const int maze_turnBack_Steps = STEPS_PER_ROUND / 2;

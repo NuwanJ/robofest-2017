@@ -60,12 +60,12 @@ bool isThisTheDestination(int boxColor) {
     // rotate a few steps
     // TO DISCUSS: HOW MUCH AND WHICH DIRECTION
     goFoward(-10);
-    if (sign_ws) {
+    /*if (sign_ws) {
       // first encounter is in right side
       turnCW(10);
     } else {
       turnCW(-10);
-    }
+    }*/
     goFoward(-30);
     // come back the other half
     // + a few more steps

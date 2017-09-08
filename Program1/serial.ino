@@ -58,6 +58,9 @@ void serialEvent() {
         Serial.print("Debug\t:"); Serial.println(debug);
       */
     }
+    else if(inChar=='*'){
+      debugProcedure();
+    }
 
     else if (inChar == 'x') {
       //Go suitable distance back, expand arm and go suitable distance forward, now take the box
@@ -81,7 +84,7 @@ void serialEvent() {
     //-------------------------------------------------------------------------------------------------------------- t -> test
     else if (inChar == 't') {
 
-      readBoxColor();
+      readColor();
       Serial.println(floorColor);
 
       //-------------------------------------------------------------------------------------------------------------- z -> interpolate
@@ -130,8 +133,8 @@ void serialEvent() {
       for (int j = i - 1; j > -1; j--) {
         val += valArr[i - 1 - j] * pow(10, j);
       }
-      stepsToRotate(round(spd), val);
-      testAndGetData(rOrd, spd, val);
+      stepsToRotate(round(spd), val/(double)100);
+      testAndGetData(rOrd, spd, (double)100);
     }
 
     //-------------------------------------------------------------------------------------------------------------- 2,4,5,6,7,8,9-> bluetooth mode
@@ -170,7 +173,7 @@ void serialEvent() {
 
 void readBoxColor() {
 
-  while (mySerial.available()) {} // nothing
+  /*while (mySerial.available()) {} // nothing
   mySerial.print("j");
   delay(10);
 
@@ -185,7 +188,7 @@ void readBoxColor() {
       break;
     }
   }
-  //return boxColor;
+  //return boxColor;*/
 }
 void stand() {
   mySerial.print("w");

@@ -6,17 +6,16 @@ void testAndGetData(char rOrd, double spd, double steps) {
   Serial.println(steps);
 
   //stepper.begin(spd, MICROSTEPS);
-  stepper.setRPM(spd);
+  //stepper.setRPM(spd);
 
   if (rOrd == 'r') {
-    motorWrite(300, 1, 1);
-    motorWrite(steps, 1, -1);
-    motorWrite(300, 1, 1);
+    motorRotate(steps);
+    motorRotate(-5);
   } else if (rOrd == 'd') {
     motorWrite(steps, 1, 1);
   }
   //stepper.begin(200, MICROSTEPS);
-  stepper.setRPM(200);
+  //stepper.setRPM(200);
 }
 
 
