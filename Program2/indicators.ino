@@ -6,6 +6,11 @@ void indicatorBegin() {
   pinMode(PIN_GREEN, OUTPUT);
   pinMode(PIN_BLUE, OUTPUT);
   pinMode(PIN_BUZZER, OUTPUT);
+
+  digitalWrite(PIN_RED, LOW);
+  digitalWrite(PIN_GREEN, LOW);
+  digitalWrite(PIN_BLUE, LOW);
+
 }
 
 

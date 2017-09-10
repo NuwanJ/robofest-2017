@@ -6,6 +6,7 @@
    q -> print IR sensor values
    t -> test
    z -> interpolate
+   w -> readWalls
      -> bluetooth mode
 */
 void serialEvent() {
@@ -33,10 +34,28 @@ void serialEvent() {
       printCurrentMazeWalls();
     }
 
+    //-------------------------------------------------------------------------------------------------------------- w -> read Walls
+    else if (inChar == 'w') {
+      wall[RIGHT_SENSOR] = digitalRead(PIN_RIGHT_WALL_SENSOR);
+      wall[FRONT_SENSOR] = digitalRead(PIN_FRONT_WALL_SENSOR);
+      wall[LEFT_SENSOR] = digitalRead(PIN_LEFT_WALL_SENSOR);
+
+      Serial.print(F(">> Walls :"));
+      Serial.print(wall[LEFT_SENSOR]);
+      Serial.print(wall[FRONT_SENSOR]);
+      Serial.println(wall[RIGHT_SENSOR]);
+    }
+
     //-------------------------------------------------------------------------------------------------------------- c -> clean current maze
     else if (inChar == 'c') {
       cleanEEPROM();
       Serial.println(F(">> Maze cleaned"));
+    }
+
+    //-------------------------------------------------------------------------------------------------------------- k -> sound buzzer
+    else if (inChar == 'k') {
+      beep();
+      Serial.println(">> Beep...");
     }
 
     //-------------------------------------------------------------------------------------------------------------- q -> print IR sensor values
@@ -58,7 +77,7 @@ void serialEvent() {
         Serial.print("Debug\t:"); Serial.println(debug);
       */
     }
-    else if(inChar=='*'){
+    else if (inChar == '*') {
       debugProcedure();
     }
 
@@ -89,20 +108,21 @@ void serialEvent() {
 
       //-------------------------------------------------------------------------------------------------------------- z -> interpolate
     } else if (inChar == 'z') {
-      char rOrd;
-      int spdArr[5];
-      double spd = 0, val = 0;
-      int valArr[5];
-      Serial.println("Rotate - r, Distance - d, Exit - x\nspeed a10s steps q200w   eg: zra10sq100w");
 
-      while (Serial.available()) {
+      /*char rOrd;
+        int spdArr[5];
+        double spd = 0, val = 0;
+        int valArr[5];
+        Serial.println("Rotate - r, Distance - d, Exit - x\nspeed a10s steps q200w   eg: zra10sq100w");
+
+        while (Serial.available()) {
         int r = Serial.read();
         rOrd = (char)r;
         if (rOrd == 'x' or rOrd == 'r' or rOrd == 'd') break;
-      }
-      if (rOrd == 'x') break;
-      int i;
-      while (Serial.available()) {
+        }
+        if (rOrd == 'x') break;
+        int i;
+        while (Serial.available()) {
         int r = Serial.read();
         if ((char) r == 'a') {
           i = 0;
@@ -112,13 +132,13 @@ void serialEvent() {
           spdArr[i] = r - '0';
           i++;
         }
-      }
-      for (int j = i - 1; j > -1; j--) {
+        }
+        for (int j = i - 1; j > -1; j--) {
         spd += spdArr[i - 1 - j] * pow(10, j);
-      }
+        }
 
 
-      while (Serial.available()) {
+        while (Serial.available()) {
         int r = Serial.read();
         if ((char) r == 'q') {
           i = 0;
@@ -128,13 +148,13 @@ void serialEvent() {
           valArr[i] = r - '0';
           i++;
         }
-      }
-      val = 0;
-      for (int j = i - 1; j > -1; j--) {
+        }
+        val = 0;
+        for (int j = i - 1; j > -1; j--) {
         val += valArr[i - 1 - j] * pow(10, j);
-      }
-      stepsToRotate(round(spd), val/(double)100);
-      testAndGetData(rOrd, spd, (double)100);
+        }
+        stepsToRotate(round(spd), val/(double)100);
+        testAndGetData(rOrd, spd, (double)100);*/
     }
 
     //-------------------------------------------------------------------------------------------------------------- 2,4,5,6,7,8,9-> bluetooth mode
@@ -171,9 +191,9 @@ void serialEvent() {
 
 
 
-void readBoxColor() {
+int readBoxColor() {
 
-  /*while (mySerial.available()) {} // nothing
+  while (mySerial.available()) {} // nothing
   mySerial.print("j");
   delay(10);
 
@@ -188,7 +208,9 @@ void readBoxColor() {
       break;
     }
   }
-  //return boxColor;*/
+  boxColorReading = boxColor;
+
+  return boxColor;
 }
 void stand() {
   mySerial.print("w");

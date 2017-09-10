@@ -24,7 +24,7 @@ Adafruit_TCS34725 color0 = Adafruit_TCS34725(TCS34725_INTEGRATIONTIME_154MS, TCS
 volatile int mode = BEGIN ;
 
 void setup() {
-  Serial.begin(57600);
+  Serial.begin(9600);
   mySerial.begin(9600);
 
   irSensorsBegin();
@@ -48,8 +48,7 @@ void setup() {
   currentFacingDir = 1;
   loadEEPROM(); // loading EEPROM data
 
-
-  finalXPosition = 2;//########################################################################################################################
+  finalXPosition = 2;
   finalYPosition = 0;
 
   boxXPosition = finalXPosition;

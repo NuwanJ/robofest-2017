@@ -46,7 +46,7 @@ void readColor() {
   }
   indicatorShow(colorR0);
 
-  if (1) {
+  if (0) {
     Serial.print(blue0);
     Serial.print(" ");
     Serial.print(red0);

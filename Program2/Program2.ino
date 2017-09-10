@@ -19,13 +19,13 @@ void setup() {
   //compassBegin();
   //sharpIRBegin();
   //sonarBegin();
-  colorBegin();
-  //indicatorBegin();
+  //colorBegin();
+  indicatorBegin();
 
 }
 
 /*
----- Beeps -------------------------------------------------
+  ---- Beeps -------------------------------------------------
   1
   2
   3
@@ -35,12 +35,12 @@ void setup() {
 
 void loop() {
 
-  readColor();
+  //readColor();
   delay(100);
   //readWalls(wall);
   //readCompass();
 
-  
-  
+
+
 }
 

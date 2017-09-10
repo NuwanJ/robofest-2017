@@ -14,7 +14,7 @@ void loop() {
         beep();
         stand();
 
-        mode = MAZE_RUN;// PICK_BOX; //FIND_ARROW;
+        mode = MAZE_OPTION;// PICK_BOX; //FIND_ARROW;
 
         Serial.println(F(">> BEGIN -> ###"));
         //delay(500);
@@ -62,14 +62,9 @@ void loop() {
       drop();
       delay(1000);
       motorWrite(100, 1, 1);
-      readBoxColor();
+      boxColorReading = readBoxColor();
       delay(1000);
       pick();
-
-      if (isBoxThere == 0) {
-        randomNumber();
-      }
-
       delay(1000);
       motorWrite(120, -1, -1);
       delay(500);
@@ -166,11 +161,12 @@ void displayLoopStatus(int mode) {
 void debugProcedure() {
   //06/09/2017 gihanchanaka@gmail.com
 
+  beep();
 
   //Go forward 1 feet
-  goF();
+  motorWrite(200, 1, 1);
   delay(1000);
-  goFF();
+  motorWrite(200, -1, -1);
   delay(1000);
 
   //Take 2 clock wise 90 deg turns
@@ -195,8 +191,6 @@ void debugProcedure() {
     Serial.println();
     delay(2000);
   }
-
-  beep();
 
   //Print LDR readings (3 times with 4 sec delays)
   for (int j = 0; j < 3; j++) {
@@ -236,14 +230,5 @@ void printColor(int c) {
   if (c == 3) Serial.print("B");
   if (c<1 or c>3) Serial.print("N");
 }
-
-
-int isBoxThere() {
-
-}
-int randomNumber() {
-  return random(1, 3);
-}
-
 
 

@@ -1,4 +1,4 @@
-
+/*
 void testAndGetData(char rOrd, double spd, double steps) {
   Serial.print(rOrd == 'r' ? "Rotation " : "Distance ");
   Serial.print(spd);
@@ -79,4 +79,6 @@ int stepsToForward(int spd, float distance) {
 
   steps = pgm_read_word_near(&(stepsGiven_Distance[distanceIndex - 1])) + (distance - pgm_read_word_near(&(distanceWentFoarward[spdIndex][distanceIndex - 1]))) * tanz;
   return steps;
-}
+}*/
+
+

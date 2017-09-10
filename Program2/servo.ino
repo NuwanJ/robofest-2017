@@ -3,7 +3,7 @@
 #define PICK_ON 160
 #define PICK_OFF 40
 
-#define GRAB_UP 90
+#define GRAB_UP 30
 #define GRAB_DOWN 100   /// 90 Nuwan
 
 void pickBox() {

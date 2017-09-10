@@ -311,8 +311,7 @@ void printCurrentMazeWalls() {
 
 int path[] = {FRONT, LEFT, RIGHT, RIGHT, LEFT, FRONT, FRONT, LEFT, FRONT, BACK, FRONT, RIGHT, FRONT,
               RIGHT, RIGHT, LEFT, FRONT, RIGHT, BACK, FRONT, FRONT, FRONT, LEFT, RIGHT, RIGHT, FRONT,
-              RIGHT, FRONT, FRONT, FRONT, FRONT, BACK, FRONT, FRONT, RIGHT, FRONT
-             };
+              RIGHT, FRONT, FRONT, FRONT, FRONT, BACK, FRONT, FRONT, RIGHT, FRONT, FRONT};
 
 
 int lenIndex = sizeof(path);
@@ -325,7 +324,6 @@ void mazeOption1() {
     else if (path[curIndex] == LEFT) maze_turnLeft();
     else if (path[curIndex] == RIGHT) maze_turnRight();
     else if (path[curIndex] == BACK) maze_turnBack();
-
     curIndex++;
   }
   else {
