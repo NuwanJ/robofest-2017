@@ -3,8 +3,12 @@
 
 Source code for stepper driven, maze solving and arrow following robot.
 
+
 Contributers :
 
+
 Gihan Chanaka
-Harshana hSumedha
+
+Harshana Sumedha
+
 Nuwan Jaliyagoda
