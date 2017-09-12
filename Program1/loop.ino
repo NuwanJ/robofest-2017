@@ -14,7 +14,7 @@ void loop() {
         beep();
         stand();
 
-        mode = MAZE_OPTION;// PICK_BOX; //FIND_ARROW;
+        mode =  PICK_BOX; //FIND_ARROW;
 
         Serial.println(F(">> BEGIN -> ###"));
         //delay(500);
@@ -70,6 +70,8 @@ void loop() {
       delay(500);
       mode = FIND_ARROW;
       beep();
+
+      boxColorReading = COLOR_GREEN;
       Serial.println(F(">> PICKING_BOX -> FIND_ARROW"));
       break;
 
@@ -90,6 +92,7 @@ void loop() {
 
     //-------------------------------------------------------------------------------------------------------------- Drop box
     case DROP_BOX:
+      motorWrite(150, -1, -1);
       drop();
       beep(3);
       Serial.println(F(">> Task is completed"));
